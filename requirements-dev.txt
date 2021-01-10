@@ -1,0 +1,5 @@
+numpy==1.2
+cbm3_python==0.7.3
+pytest==6.2.1
+flake8
+python==3.8.*
