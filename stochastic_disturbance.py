@@ -9,7 +9,9 @@ def get_stochastic_disturbance_years(
         end_age,
         step_size,
         simulations,
-        disturbance_delay=0) -> list:
+        random_state=None,
+        disturbance_delay=0
+        ) -> list:
     """
     Returns a list of disturbance years using a uniform probability distribution.
 
@@ -27,6 +29,8 @@ def get_stochastic_disturbance_years(
     simulations : int
     disturbance_delay : int
         Delay in years until disturbances begin.
+    seed : int
+        
 
     Note
     -------------
@@ -47,7 +51,8 @@ def get_stochastic_disturbance_years(
     disturbances = uniform.rvs(
         loc=loc, 
         scale=mean_disturbance_time*2 + step_size,
-        size=(simulations, samples))
+        size=(simulations, samples),
+        random_state=random_state)
     cumulative_disturbances = np.cumsum(disturbances, axis=1)
     # For the slim chance that the cumulative sum of `disturbances,
     # defined by (`samples`), is less than end_age.
